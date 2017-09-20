@@ -36,13 +36,13 @@
 
 "No current server profile." = "未设置当前服务器配置";
 
-"Shadowsocks: On" = "Shadowsocks: On";
+"Shadowsocks: On" = "VPN: On";
 
-"Turn Shadowsocks Off" = "关闭 Shadowsocks";
+"Turn Shadowsocks Off" = "关闭 VPN";
 
-"Shadowsocks: Off" = "Shadowsocks: Off";
+"Shadowsocks: Off" = "VPN: Off";
 
-"Turn Shadowsocks On" = "打开 Shadowsocks";
+"Turn Shadowsocks On" = "打开 VPN";
 
 "Proxy - Auto By PAC" = "代理 - PAC自动（⌃⌘P）";
 
@@ -50,7 +50,7 @@
 
 "Proxy - Manual" = "代理 - 手动";
 
-"Servers" = "服务器";
+"MyAccount" = "我的账户";
 
 "Auto" = "自动";
 

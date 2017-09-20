@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     @IBOutlet weak var globalModeMenuItem: NSMenuItem!
     @IBOutlet weak var manualModeMenuItem: NSMenuItem!
     
-    @IBOutlet weak var serversMenuItem: NSMenuItem!
+    @IBOutlet weak var myAccountMenuItem: NSMenuItem!
     @IBOutlet var showQRCodeMenuItem: NSMenuItem!
     @IBOutlet var scanQRCodeMenuItem: NSMenuItem!
     @IBOutlet var serverProfilesBeginSeparatorMenuItem: NSMenuItem!
@@ -173,8 +173,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             , forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
         updateMainMenu()
-        updateCopyHttpProxyExportMenu()
-        updateServersMenu()
+//        updateCopyHttpProxyExportMenu()
+//        updateServersMenu()
+        
         updateRunningModeMenu()
         
         ProxyConfHelper.install()
@@ -305,6 +306,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         applyConfig()
     }
     
+    @IBAction func selectMyAcount(_ sender: NSMenuItem) {
+        let defaults = UserDefaults.standard
+        defaults.setValue("auto", forKey: "ShadowsocksRunningMode")
+        updateRunningModeMenu()
+        applyConfig()
+    }
+    
     @IBAction func selectGlobalMode(_ sender: NSMenuItem) {
         let defaults = UserDefaults.standard
         defaults.setValue("global", forKey: "ShadowsocksRunningMode")
@@ -329,6 +337,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         ctrl.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
         ctrl.window?.makeKeyAndOrderFront(self)
+    }
+    
+    @IBAction func showMyAccount(_ sender: NSMenuItem){
+        
     }
     
     @IBAction func showAllInOnePreferences(_ sender: NSMenuItem) {
@@ -395,21 +407,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let defaults = UserDefaults.standard
         let mode = defaults.string(forKey: "ShadowsocksRunningMode")
         
-        var serverMenuText = "Servers".localized
+        var myAccountMenuText = "MyAccount".localized
 
-        let mgr = ServerProfileManager.instance
-        for p in mgr.profiles {
-            if mgr.activeProfileId == p.uuid {
-                var profileName :String
-                if !p.remark.isEmpty {
-                    profileName = p.remark
-                } else {
-                    profileName = p.serverHost
-                }
-                serverMenuText = "\(serverMenuText) - \(profileName)"
-            }
-        }
-        serversMenuItem.title = serverMenuText
+//        let mgr = ServerProfileManager.instance
+//        for p in mgr.profiles {
+//            if mgr.activeProfileId == p.uuid {
+//                var profileName :String
+//                if !p.remark.isEmpty {
+//                    profileName = p.remark
+//                } else {
+//                    profileName = p.serverHost
+//                }
+//                serverMenuText = "\(serverMenuText) - \(profileName)"
+//            }
+//        }
+        myAccountMenuItem.title = myAccountMenuText
         
         if mode == "auto" {
             autoModeMenuItem.state = 1
@@ -470,39 +482,39 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func updateCopyHttpProxyExportMenu() {
-        let defaults = UserDefaults.standard
-        let isOn = defaults.bool(forKey: "LocalHTTPOn")
-        copyHttpProxyExportCmdLineMenuItem.isHidden = !isOn
+//        let defaults = UserDefaults.standard
+//        let isOn = defaults.bool(forKey: "LocalHTTPOn")
+//        copyHttpProxyExportCmdLineMenuItem.isHidden = !isOn
     }
     
     func updateServersMenu() {
-        guard let menu = serversMenuItem.submenu else { return }
-
-        let mgr = ServerProfileManager.instance
-        let profiles = mgr.profiles
-
-        // Remove all profile menu items
-        let beginIndex = menu.index(of: serverProfilesBeginSeparatorMenuItem) + 1
-        let endIndex = menu.index(of: serverProfilesEndSeparatorMenuItem)
-        // Remove from end to begin, so the index won't change :)
-        for index in (beginIndex..<endIndex).reversed() {
-            menu.removeItem(at: index)
-        }
-
-        // Insert all profile menu items
-        for (i, profile) in profiles.enumerated().reversed() {
-            let item = NSMenuItem()
-            item.tag = i + kProfileMenuItemIndexBase
-            item.title = profile.title()
-            item.state = (mgr.activeProfileId == profile.uuid) ? 1 : 0
-            item.isEnabled = profile.isValid()
-            item.action = #selector(AppDelegate.selectServer)
-            
-            menu.insertItem(item, at: beginIndex)
-        }
-
-        // End separator is redundant if profile section is empty
-        serverProfilesEndSeparatorMenuItem.isHidden = profiles.isEmpty
+//        guard let menu = serversMenuItem.submenu else { return }
+//
+//        let mgr = ServerProfileManager.instance
+//        let profiles = mgr.profiles
+//
+//        // Remove all profile menu items
+//        let beginIndex = menu.index(of: serverProfilesBeginSeparatorMenuItem) + 1
+//        let endIndex = menu.index(of: serverProfilesEndSeparatorMenuItem)
+//        // Remove from end to begin, so the index won't change :)
+//        for index in (beginIndex..<endIndex).reversed() {
+//            menu.removeItem(at: index)
+//        }
+//
+//        // Insert all profile menu items
+//        for (i, profile) in profiles.enumerated().reversed() {
+//            let item = NSMenuItem()
+//            item.tag = i + kProfileMenuItemIndexBase
+//            item.title = profile.title()
+//            item.state = (mgr.activeProfileId == profile.uuid) ? 1 : 0
+//            item.isEnabled = profile.isValid()
+//            item.action = #selector(AppDelegate.selectServer)
+//            
+//            menu.insertItem(item, at: beginIndex)
+//        }
+//
+//        // End separator is redundant if profile section is empty
+//        serverProfilesEndSeparatorMenuItem.isHidden = profiles.isEmpty
     }
     
     func handleURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
