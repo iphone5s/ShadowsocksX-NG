@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -16,7 +16,6 @@
             <connections>
                 <outlet property="autoModeMenuItem" destination="r07-Gu-aEz" id="9aH-pQ-Rgi"/>
                 <outlet property="globalModeMenuItem" destination="Mw3-Jm-eXA" id="ar5-Yx-3ze"/>
-                <outlet property="manualModeMenuItem" destination="8PR-gs-c5N" id="9qz-mU-5kt"/>
                 <outlet property="myAccountMenuItem" destination="u5M-hQ-VSc" id="qsC-zx-gge"/>
                 <outlet property="runningStatusMenuItem" destination="fzk-mE-CEV" id="Vwm-Rg-Ykn"/>
                 <outlet property="statusMenu" destination="Hob-KD-bx9" id="clA-ZW-0pT"/>
@@ -46,12 +45,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="selectGlobalMode:" target="Voe-Tx-rLC" id="7QH-HB-B2e"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Manual Mode" id="8PR-gs-c5N">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="selectManualMode:" target="Voe-Tx-rLC" id="Xxb-28-6fi"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="BMf-0T-UcX"/>

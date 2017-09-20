@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     @IBOutlet weak var toggleRunningMenuItem: NSMenuItem!
     @IBOutlet weak var autoModeMenuItem: NSMenuItem!
     @IBOutlet weak var globalModeMenuItem: NSMenuItem!
-    @IBOutlet weak var manualModeMenuItem: NSMenuItem!
+//    @IBOutlet weak var manualModeMenuItem: NSMenuItem!
     
     @IBOutlet weak var myAccountMenuItem: NSMenuItem!
     @IBOutlet var showQRCodeMenuItem: NSMenuItem!
@@ -71,6 +71,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+        let mtaSocket = MTASocket.init();
+        mtaSocket.sendData(nil);
         
         _ = LaunchAtLoginController()// Ensure set when launch
         
@@ -426,15 +429,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if mode == "auto" {
             autoModeMenuItem.state = 1
             globalModeMenuItem.state = 0
-            manualModeMenuItem.state = 0
+//            manualModeMenuItem.state = 0
         } else if mode == "global" {
             autoModeMenuItem.state = 0
             globalModeMenuItem.state = 1
-            manualModeMenuItem.state = 0
+//            manualModeMenuItem.state = 0
         } else if mode == "manual" {
             autoModeMenuItem.state = 0
             globalModeMenuItem.state = 0
-            manualModeMenuItem.state = 1
+//            manualModeMenuItem.state = 1
         }
         updateStatusMenuImage()
     }
