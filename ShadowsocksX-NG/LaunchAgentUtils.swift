@@ -13,9 +13,9 @@ let KCPTUN_CLIENT_VERSION = "20170322"
 let PRIVOXY_VERSION = "3.0.26.static"
 let APP_SUPPORT_DIR = "/Library/Application Support/ShadowsocksX-NG/"
 let LAUNCH_AGENT_DIR = "/Library/LaunchAgents/"
-let LAUNCH_AGENT_CONF_SSLOCAL_NAME = "com.qiuyuzhou.shadowsocksX-NG.local.plist"
-let LAUNCH_AGENT_CONF_PRIVOXY_NAME = "com.qiuyuzhou.shadowsocksX-NG.http.plist"
-let LAUNCH_AGENT_CONF_KCPTUN_NAME = "com.qiuyuzhou.shadowsocksX-NG.kcptun.plist"
+let LAUNCH_AGENT_CONF_SSLOCAL_NAME = "com.xiezhen.vpn.local.plist"
+let LAUNCH_AGENT_CONF_PRIVOXY_NAME = "com.xiezhen.vpn.http.plist"
+let LAUNCH_AGENT_CONF_KCPTUN_NAME = "com.xiezhen.vpn.kcptun.plist"
 
 
 func getFileSHA1Sum(_ filepath: String) -> String {
@@ -58,7 +58,7 @@ func generateSSLocalLauchAgentPlist() -> Bool {
     
     // For a complete listing of the keys, see the launchd.plist manual page.
     let dict: NSMutableDictionary = [
-        "Label": "com.qiuyuzhou.shadowsocksX-NG.local",
+        "Label": "com.xiezhen.vpn.local",
         "WorkingDirectory": NSHomeDirectory() + APP_SUPPORT_DIR,
         "StandardOutPath": logFilePath,
         "StandardErrorPath": logFilePath,
@@ -200,7 +200,7 @@ func generatePrivoxyLauchAgentPlist() -> Bool {
     
     // For a complete listing of the keys, see the launchd.plist manual page.
     let dict: NSMutableDictionary = [
-        "Label": "com.qiuyuzhou.shadowsocksX-NG.http",
+        "Label": "com.xiezhen.vpn.http",
         "WorkingDirectory": NSHomeDirectory() + APP_SUPPORT_DIR,
         "StandardOutPath": logFilePath,
         "StandardErrorPath": logFilePath,
@@ -354,7 +354,7 @@ func generateKcptunLauchAgentPlist() -> Bool {
     
     // For a complete listing of the keys, see the launchd.plist manual page.
     let dict: NSMutableDictionary = [
-        "Label": "com.qiuyuzhou.shadowsocksX-NG.kcptun",
+        "Label": "com.xiezhen.vpn.kcptun",
         "WorkingDirectory": NSHomeDirectory() + APP_SUPPORT_DIR,
         "StandardOutPath": logFilePath,
         "StandardErrorPath": logFilePath,

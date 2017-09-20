@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 //    @IBOutlet weak var manualModeMenuItem: NSMenuItem!
     
     @IBOutlet weak var myAccountMenuItem: NSMenuItem!
+    @IBOutlet weak var serversMenuItem: NSMenuItem!
     @IBOutlet var showQRCodeMenuItem: NSMenuItem!
     @IBOutlet var scanQRCodeMenuItem: NSMenuItem!
     @IBOutlet var serverProfilesBeginSeparatorMenuItem: NSMenuItem!
@@ -225,6 +226,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func doToggleRunning(showToast: Bool) {
         let defaults = UserDefaults.standard
         var isOn = UserDefaults.standard.bool(forKey: "ShadowsocksOn")
+        
+        let mgr = ServerProfileManager.instance
+        if mgr.activeProfileId == nil{
+            let alert = NSAlert();
+            alert.messageText = "提示";
+            alert.informativeText = "请选择要连接的服务器!";
+            alert.addButton(withTitle: "确定");
+            
+            alert.runModal();
+        
+            return;
+        }
+        
         isOn = !isOn
         defaults.set(isOn, forKey: "ShadowsocksOn")
         
@@ -410,8 +424,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let defaults = UserDefaults.standard
         let mode = defaults.string(forKey: "ShadowsocksRunningMode")
         
-        var myAccountMenuText = "MyAccount".localized
-
+        myAccountMenuItem.title = "MyAccount".localized
+        serversMenuItem.title = "Servers".localized
 //        let mgr = ServerProfileManager.instance
 //        for p in mgr.profiles {
 //            if mgr.activeProfileId == p.uuid {
@@ -424,7 +438,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 //                serverMenuText = "\(serverMenuText) - \(profileName)"
 //            }
 //        }
-        myAccountMenuItem.title = myAccountMenuText
         
         if mode == "auto" {
             autoModeMenuItem.state = 1

@@ -18,6 +18,7 @@
                 <outlet property="globalModeMenuItem" destination="Mw3-Jm-eXA" id="ar5-Yx-3ze"/>
                 <outlet property="myAccountMenuItem" destination="u5M-hQ-VSc" id="qsC-zx-gge"/>
                 <outlet property="runningStatusMenuItem" destination="fzk-mE-CEV" id="Vwm-Rg-Ykn"/>
+                <outlet property="serversMenuItem" destination="mQp-YT-UY3" id="vLY-z4-zIC"/>
                 <outlet property="statusMenu" destination="Hob-KD-bx9" id="clA-ZW-0pT"/>
                 <outlet property="toggleRunningMenuItem" destination="GSu-Tf-StS" id="XHw-pU-nCa"/>
             </connections>
@@ -52,6 +53,12 @@
                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <connections>
                         <action selector="showMyAccount:" target="Voe-Tx-rLC" id="yBM-sS-zPm"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Servers" id="mQp-YT-UY3">
+                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                    <connections>
+                        <action selector="showMyAccount:" target="Voe-Tx-rLC" id="jys-DR-oXF"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="vwY-hQ-ZIz"/>
