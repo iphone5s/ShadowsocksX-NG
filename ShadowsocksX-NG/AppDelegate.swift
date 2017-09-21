@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var allInOnePreferencesWinCtrl: PreferencesWinController!
     var toastWindowCtrl: ToastWindowController!
 
+    var myAccountWinCtrl:SSMyAccountWindowController!
+    var serversWinCtrl:SSServersWindowController!
+    
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var statusMenu: NSMenu!
     
@@ -231,7 +234,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if mgr.activeProfileId == nil{
             let alert = NSAlert();
             alert.messageText = "提示";
-            alert.informativeText = "请选择要连接的服务器!";
+            alert.informativeText = "请打开服务器列表，选择要连接的服务器!";
             alert.addButton(withTitle: "确定");
             
             alert.runModal();
@@ -323,13 +326,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         applyConfig()
     }
     
-    @IBAction func selectMyAcount(_ sender: NSMenuItem) {
-        let defaults = UserDefaults.standard
-        defaults.setValue("auto", forKey: "ShadowsocksRunningMode")
-        updateRunningModeMenu()
-        applyConfig()
-    }
-    
     @IBAction func selectGlobalMode(_ sender: NSMenuItem) {
         let defaults = UserDefaults.standard
         defaults.setValue("global", forKey: "ShadowsocksRunningMode")
@@ -357,7 +353,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     @IBAction func showMyAccount(_ sender: NSMenuItem){
+        if myAccountWinCtrl != nil {
+            myAccountWinCtrl.close()
+        }
+        let ctrl = SSMyAccountWindowController(windowNibName: "SSMyAccountWindowController")
+        myAccountWinCtrl = ctrl
         
+        ctrl.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
+        ctrl.window?.makeKeyAndOrderFront(self)
+    }
+    
+    @IBAction func showServers(_ sender: NSMenuItem){
+        if serversWinCtrl != nil {
+            serversWinCtrl.close()
+        }
+        let ctrl = SSServersWindowController(windowNibName: "SSServersWindowController")
+        serversWinCtrl = ctrl
+        
+        ctrl.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
+        ctrl.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func showAllInOnePreferences(_ sender: NSMenuItem) {

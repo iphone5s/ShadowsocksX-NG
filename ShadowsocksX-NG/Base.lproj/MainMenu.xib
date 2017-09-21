@@ -58,7 +58,7 @@
                 <menuItem title="Servers" id="mQp-YT-UY3">
                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <connections>
-                        <action selector="showMyAccount:" target="Voe-Tx-rLC" id="jys-DR-oXF"/>
+                        <action selector="showServers:" target="Voe-Tx-rLC" id="e3K-kz-qoT"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="vwY-hQ-ZIz"/>
