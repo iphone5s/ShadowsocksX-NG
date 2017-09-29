@@ -7,23 +7,24 @@
 //
 
 import Cocoa
+import YTKNetwork
 
 class SSServersWindowController: NSWindowController,NSTableViewDelegate,NSTableViewDataSource {
 
     @IBOutlet weak var m_tableView:NSTableView!
     @IBOutlet weak var m_selectBtn:NSButton!
+    var m_dataArray:NSMutableArray!
     
     override func windowDidLoad() {
         super.windowDidLoad()
 
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        m_dataArray = NSMutableArray();
         self.configUI()
-        
-        m_tableView.reloadData();
+        self.reloadData();
     }
     
     func configUI() {
-        
         m_tableView.delegate = self;
         m_tableView.dataSource = self;
         m_tableView.rowHeight = 30;
@@ -31,8 +32,19 @@ class SSServersWindowController: NSWindowController,NSTableViewDelegate,NSTableV
         m_selectBtn.font = NSFont.systemFont(ofSize: 11);
     }
     
+    func reloadData() {
+        let api = APIGetServers();
+        api.startWithCompletionBlock(success: { (request:YTKBaseRequest) in
+            
+            self.m_dataArray.addObjects(from: request.responseModel as! [Any])
+            self.m_tableView.reloadData();
+        }) { (request:YTKBaseRequest) in
+            NSLog("failed");
+        }
+    }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 100;
+        return m_dataArray.count;
     }
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
@@ -43,23 +55,25 @@ class SSServersWindowController: NSWindowController,NSTableViewDelegate,NSTableV
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         let cellView = SSServersCellView();
-        let model:String
+        let strModel:String
         
         if (tableColumn?.title == "服务器") {
-            model = "美国加利福尼亚01";
+            let model:MServerInfo = m_dataArray.object(at: row) as! MServerInfo
+            strModel = model.strServerName
         }else if(tableColumn?.title == "网络延迟"){
-            model = "100毫秒";
+            strModel = "100毫秒";
         }else if(tableColumn?.title == "连通率"){
-            model = "100%";
+            strModel = "100%";
         }else if(tableColumn?.title == "在线人数"){
-            model = "231人";
+            strModel = "231人";
         } else if(tableColumn?.title == "状态"){
-            model = "极速";
+            strModel = "极速";
         }else{
-            model = "";
+            strModel = "";
         }
-        cellView.configWithModel(model: model)
+        cellView.configWithModel(model: strModel)
         
+//        let data = NSData
         return cellView
     }
     

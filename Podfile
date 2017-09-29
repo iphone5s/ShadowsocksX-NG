@@ -14,7 +14,9 @@ target 'ShadowsocksX-NG' do
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
   
-  pod 'YTKNetwork'
+  pod 'YTKNetwork',:git => 'https://github.com/iphone5s/YTKNetwork.git'
+  pod 'CryptoSwift'
+  pod 'MJExtension'
   
   target 'ShadowsocksX-NGTests' do
     inherit! :search_paths

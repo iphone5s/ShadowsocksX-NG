@@ -10,6 +10,7 @@ import Cocoa
 import Carbon
 import RxCocoa
 import RxSwift
+import YTKNetwork
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -79,6 +80,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let mtaSocket = MTASocket.init();
         mtaSocket.sendData(nil);
         
+        YTKNetworkConfig.shared().baseUrl = "http://www.55vpn.cn/";
+    
         _ = LaunchAtLoginController()// Ensure set when launch
         
         NSUserNotificationCenter.default.delegate = self

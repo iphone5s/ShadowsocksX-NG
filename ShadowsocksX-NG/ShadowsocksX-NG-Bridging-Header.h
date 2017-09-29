@@ -11,3 +11,4 @@
 #import "ProxyConfHelper.h"
 #import "ProxyConfTool.h"
 #import "MTASocket.h"
+#import "MServerInfo.h"
